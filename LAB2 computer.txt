@@ -1,0 +1,149 @@
+/**
+ * You can edit, run, and share this code.
+ * play.kotlinlang.org
+ */
+fun main() {
+var university = "Imam Abdulrahman Bin Faisal University"
+var courseCode = "CSC 402"
+var creditHours = 3
+var studentsEnrolled = 28
+var   isElective = false
+    println("$courseCode has $studentsEnrolled students enrolled ($creditHours creditHours)")
+    studentsEnrolled+=2
+     println("$courseCode has $studentsEnrolled students enrolled ($creditHours creditHours)")
+     println("University name length: ${university.length}")
+     task2()
+     task3()
+     task4()
+     task5()
+}
+
+fun greetStudent(name: String, course: String = "CSC 402"): String {
+    return "Welcome to $course, $name!"
+    
+}
+
+
+fun finalMark(
+    quizzes: Double,
+    project: Double,
+    finalExam: Double
+): Double = quizzes * 0.10 + project * 0.70 + finalExam * 0.20
+
+
+fun printBanner(title: String, width: Int = 40) {
+    println("-".repeat(width))
+    println(title)
+    println("-".repeat(width))
+}
+
+
+
+fun task2() {
+
+    printBanner("CSC 402 Lab 2")
+
+    println(greetStudent("Sara"))
+
+    println(greetStudent("Sara", "CSC 401"))
+
+    val mark1 = finalMark(90.0, 85.0, 80.0)
+
+    val mark2 = finalMark(
+        finalExam = 80.0,
+        quizzes = 90.0,
+        project = 85.0
+    )
+
+    println("Final mark using positional arguments: $mark1")
+    println("Final mark using named arguments: $mark2")
+}
+fun letterGrade(mark: Int): String = when {
+    mark >= 95 && mark <= 100 -> "A+"
+    mark >= 90 && mark <= 94 -> "A"
+    mark >= 85 && mark <= 89 -> "B+"
+    mark >= 80 && mark <= 84 -> "B"
+    mark >= 75 && mark <= 79 -> "C+"
+    mark >= 70 && mark <= 74 -> "C"
+    mark >= 65 && mark <= 69 -> "D+"
+    mark >= 60 && mark <= 64 -> "D"
+    mark >= 0 && mark <= 59 -> "F"
+    else -> "Invalid"
+}
+fun status(mark: Int): String =
+    if (mark >= 60 && mark <= 100) "Pass" else "Fail"
+
+fun task3() {
+    val marks = listOf(97, 88, 74, 61, 45, 130)
+
+    for (mark in marks) {
+        println("Mark $mark -> ${letterGrade(mark)} (${status(mark)})")
+    }
+}
+fun describeTeam(teamName: String?): String {
+    return teamName?.let {
+        "Team: $it (${it.length} characters)"
+    } ?: "Team not registered yet"
+}
+
+fun task4() {
+    val nickname: String? = null
+    val fullName: String = "Abdullah Al-Qahtani"
+
+    println(fullName.length)
+
+    println(nickname?.length)
+  
+
+    println(nickname ?: "no nickname set")
+
+    println(describeTeam("Team Falcon"))
+    println(describeTeam(null))
+
+   
+}
+data class Course(
+    val code: String,
+    val title: String,
+    val credits: Int,
+    val days: String
+)
+
+fun findCourse(list: List<Course>, code: String): String {
+    return list.firstOrNull { it.code == code }?.title ?: "Course not found"
+}
+
+fun task5() {
+
+    val courses = listOf(
+        Course("CSC 402", "Mobile Application Programming", 3, "Mon / Wed"),
+        Course("CSC 311", "Database Systems", 4, "Sun / Tue"),
+        Course("CSC 340", "Operating Systems", 3, "Mon / Wed"),
+        Course("MATH 202", "Discrete Mathematics", 3, "Sun / Thu"),
+        Course("ENG 214", "Technical Writing", 2, "Tue")
+    )
+
+    courses.forEach {
+        println(it)
+    }
+
+    val filteredCourses = courses.filter { it.credits >= 3 }
+    println(filteredCourses)
+
+    val courseCodes = courses.map { it.code }
+    println(courseCodes)
+
+    val totalCredits = courses.sumOf { it.credits }
+    println("Total credits: $totalCredits")
+
+    println(findCourse(courses, "CSC 402"))
+    println(findCourse(courses, "CSC 999"))
+
+
+    val csc402 = courses.firstOrNull { it.code == "CSC 402" }
+
+    val copiedCourse = csc402?.copy(credits = 4)
+
+    println("Copied course: $copiedCourse")
+    println("Original course: $csc402")
+}
