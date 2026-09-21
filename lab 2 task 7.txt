@@ -1,0 +1,251 @@
+package com.example.profilecard
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.profilecard.ui.theme.ProfileCardTheme
+
+val IdNavy = Color(0xFF082B4C)
+val IdGreen = Color(0xFF24C875)
+val IdLightGreen = Color(0xFFE2F8EC)
+val IdBackground = Color(0xFFF2F6F8)
+val IdGreyChip = Color(0xFFE5E7EB)
+
+@Composable
+fun StudentIdScreen(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(IdBackground)
+    ) {
+
+        // Top bar
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(IdNavy)
+                .padding(horizontal = 20.dp, vertical = 14.dp)
+        ) {
+            Text(
+                text = "Student ID",
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = "Task 7 - Row & Column",
+                color = Color.LightGray,
+                fontSize = 12.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+
+            // Card 1
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(18.dp)
+                ) {
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+
+                        // Avatar
+                        Box(
+                            modifier = Modifier
+                                .size(60.dp)
+                                .clip(CircleShape)
+                                .background(IdNavy),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "M",
+                                color = IdGreen,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.width(14.dp))
+
+                        Column {
+
+                            Text(
+                                text = "Munira",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 18.sp
+                            )
+
+                            Text(
+                                text = "Computer Science",
+                                color = Color.Gray,
+                                fontSize = 13.sp
+                            )
+
+                            Spacer(modifier = Modifier.height(4.dp))
+
+                            Text(
+                                text = "2240000754",
+                                fontFamily = FontFamily.Monospace,
+                                color = Color.Gray,
+                                fontSize = 13.sp
+                            )
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Row {
+
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(12.dp))
+                                        .background(IdLightGreen)
+                                        .padding(
+                                            horizontal = 10.dp,
+                                            vertical = 4.dp
+                                        )
+                                ) {
+                                    Text(
+                                        text = "Level 4",
+                                        color = IdGreen,
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(12.dp))
+                                        .background(IdGreyChip)
+                                        .padding(
+                                            horizontal = 10.dp,
+                                            vertical = 4.dp
+                                        )
+                                ) {
+                                    Text(
+                                        text = "CSHJ",
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    HorizontalDivider()
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Card 2
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+
+                    StatItem(
+                        value = "4.42",
+                        label = "GPA"
+                    )
+
+                    StatItem(
+                        value = "78",
+                        label = "Credits"
+                    )
+
+                    StatItem(
+                        value = "Active",
+                        label = "Status"
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Hint: outer Column, inner Row for the avatar + details, and a Row of three Columns for the statistics strip.",
+                color = Color.Gray,
+                fontSize = 12.sp
+            )
+        }
+    }
+}
+
+@Composable
+fun StatItem(
+    value: String,
+    label: String
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Text(
+            text = value,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp
+        )
+
+        Text(
+            text = label,
+            color = Color.Gray,
+            fontSize = 12.sp
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StudentIdScreenPreview() {
+    ProfileCardTheme {
+        StudentIdScreen()
+    }
+}
