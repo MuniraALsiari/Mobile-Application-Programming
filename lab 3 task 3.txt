@@ -1,0 +1,157 @@
+package com.example.profilecard
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.profilecard.ui.theme.ProfileCardTheme
+
+data class Student(
+    val name: String,
+    val program: String,
+    val gpa: String,
+    val email: String,
+    val city: String
+)
+
+@Composable
+fun StudentCard(
+    student: Student,
+    modifier: Modifier = Modifier
+) {
+
+    val initials = student.name
+        .split(" ")
+        .filter { it.isNotBlank() }
+        .take(2)
+        .joinToString("") { it.first().uppercase() }
+
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Box(
+                    modifier = Modifier.size(56.dp)
+                ) {
+
+                    Box(
+                        modifier = Modifier
+                            .size(52.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF0B2D4A)),
+                        contentAlignment = Alignment.Center
+                    ) {
+
+                        Text(
+                            text = initials,
+                            color = Color.White
+                        )
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .align(Alignment.BottomEnd)
+                            .clip(CircleShape)
+                            .background(Color.White),
+                        contentAlignment = Alignment.Center
+                    ) {
+
+                        Box(
+                            modifier = Modifier
+                                .size(10.dp)
+                                .clip(CircleShape)
+                                .background(Color.Green)
+                        )
+                    }
+                }
+
+                Spacer(
+                    modifier = Modifier.width(12.dp)
+                )
+
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+
+                    Text(
+                        text = student.name,
+                        fontSize = 20.sp,
+                        color = Color.Black
+                    )
+
+                    Text(
+                        text = student.program,
+                        fontSize = 14.sp,
+                        color = Color.Gray
+                    )
+                }
+
+                Text(
+                    text = student.gpa,
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+            }
+
+            HorizontalDivider()
+
+            Text(
+                text = student.email,
+                fontSize = 14.sp,
+                color = Color.Gray
+            )
+
+            Text(
+                text = student.city,
+                fontSize = 14.sp,
+                color = Color.Gray
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StudentCardPreview() {
+
+    ProfileCardTheme {
+
+        StudentCard(
+            student = Student(
+                name = "Munira",
+                program = "Computer Science",
+                gpa = "5",
+                email = "munira@gmail.com",
+                city = "Jubail"
+            )
+        )
+    }
+}
